@@ -14,19 +14,7 @@ namespace EcoAmigios.Forms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //conexion MongoDB
-            var client = new MongoClient("mongodb://127.0.0.1:27017");
-            //Conexion base de datoa
-            var database = client.GetDatabase("EcoAmigos");
-            //Conexion collections
-            var GrupoCollections = database.GetCollection<Pagina>("EAV_PAGINA");
-            //Mostrar Datos
-            var ListGrupo = GrupoCollections.Find(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString()).ToList();
-
-            tipo_pagina.Text = ListGrupo[0].Tipo_Pagina.ToString();
-            TbNombreP.Text = ListGrupo[0].Nombre_Pagina.ToString();
-            TbDescP.Text = ListGrupo[0].Descripcion_Pagina.ToString();
-            ImageP.ImageUrl = "~/Imagenes/" + ListGrupo[0].Logo_Grupo.ToString();
+            
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)
@@ -44,9 +32,8 @@ namespace EcoAmigios.Forms
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
-            if (LabelImg.Text != "")
-            {
-                if (tipo_pagina.SelectedIndex != 0 || TbNombreP.Text != "" || TbDescP.Text != "")
+            
+                if ( TbDescP.Text != "" && tipo_pagina.SelectedIndex != 0)
                 {
                     //conexion MongoDB
                     var client = new MongoClient("mongodb://127.0.0.1:27017");
@@ -56,38 +43,34 @@ namespace EcoAmigios.Forms
                     var GrupoCollections = database.GetCollection<Pagina>("EAV_PAGINA");
                     //Mostrar Datos
                     var ListGrupo = GrupoCollections.Find(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString()).ToList();
-                    //Datos
-                    var Pagina = new Pagina() { id = ListGrupo[0].id.ToString(), ID_Grupo_Ambiental = Int64.Parse(ListGrupo[0].ID_Grupo_Ambiental.ToString()), Nombre_Pagina = TbNombreP.Text, Descripcion_Pagina = TbDescP.Text, Logo_Grupo = LabelImg.Text };
-                    //Actualizar
-                    GrupoCollections.ReplaceOne(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString(), Pagina);
+                    //agregar datos
+                    var Pagina = new Pagina() {id = ListGrupo[0].id, Nombre_Pagina = TbNombreP.Text, Descripcion_Pagina = TbDescP.Text, ID_Grupo_Ambiental = ListGrupo[0].ID_Grupo_Ambiental, Logo_Grupo = LabelImg.Text, Tipo_Pagina = tipo_pagina.Text };
+                    //Actualizar Datos
+                    GrupoCollections.ReplaceOne(d => d.Nombre_Pagina == TbNombreP.Text,Pagina);
+
+
+                    SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=EcoAmigos;Integrated Security=True");
+                    SqlCommand cmd = new SqlCommand("UPDATE EAV_PAGINA SET Descripcion_Pagina = '" + TbDescP.Text + "',Tipo_Pagina = '" + tipo_pagina.Text + "', Logo_Grupo = '" + LabelImg.Text + "' WHERE Nombre_Pagina = '" + TbNombreP.Text + "'", conn);
+                    conn.Open();
+
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        Response.Redirect("Inicio_Grupo.aspx");
+                    }
+                    catch (Exception EX)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + EX + "');", true);
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No puede dejar campos en blanco!!');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No puede dejar espacios en blanco');", true);
                 }
-            }
-            else
-            {
-                if (TbNombreP.Text != "" || TbDescP.Text != "")
-                {
-                    //conexion MongoDB
-                    var client = new MongoClient("mongodb://127.0.0.1:27017");
-                    //Conexion base de datoa
-                    var database = client.GetDatabase("EcoAmigos");
-                    //Conexion collections
-                    var GrupoCollections = database.GetCollection<Pagina>("EAV_PAGINA");
-                    //Mostrar Datos
-                    var ListGrupo = GrupoCollections.Find(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString()).ToList();
-                    //Datos
-                    var Pagina = new Pagina() { id = ListGrupo[0].id.ToString(), ID_Grupo_Ambiental = Int64.Parse(ListGrupo[0].ID_Grupo_Ambiental.ToString()), Nombre_Pagina = TbNombreP.Text, Descripcion_Pagina = TbDescP.Text, Logo_Grupo = ListGrupo[0].Logo_Grupo.ToString() };
-                    //Actualizar
-                    GrupoCollections.ReplaceOne(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString(), Pagina);
-                }
-                else
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No puede dejar campos en blanco!!');", true);
-                }
-            }
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -192,6 +175,17 @@ namespace EcoAmigios.Forms
 
         protected void IBEPagina_Click(object sender, ImageClickEventArgs e)
         {
+            //conexion MongoDB
+            var client = new MongoClient("mongodb://127.0.0.1:27017");
+            //Conexion base de datoa
+            var database = client.GetDatabase("EcoAmigos");
+            //Conexion collections
+            var GrupoCollections = database.GetCollection<Pagina>("EAV_PAGINA");
+            //Mostrar Datos
+            var ListGrupo = GrupoCollections.Find(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString()).ToList();
+
+            TbNombreP.Text = ListGrupo[0].Nombre_Pagina.ToString();
+            LabelImg.Text = ListGrupo[0].Logo_Grupo.ToString();
             MultiView1.ActiveViewIndex = 1;
         }
 
@@ -215,58 +209,18 @@ namespace EcoAmigios.Forms
             MultiView1.ActiveViewIndex = 0;
         }
 
-        protected void BtnMostrarPublicacion_Click(object sender, EventArgs e)
-        {
-            //conexion MongoDB
-            var client = new MongoClient("mongodb://127.0.0.1:27017");
-            //Conexion base de datoa
-            var database = client.GetDatabase("EcoAmigos");
-            //Conexion collections
-            var PubliCollections = database.GetCollection<Publicacion>("EAV_PUBLIBACIONES");
-            //Mostrar Datos
-            var ListGrupo = PubliCollections.Find(d => d.Titutlo_Publi == DropDownListPublicacion.Text).ToList();
-
-            TbContP0.Text = ListGrupo[0].Contenido_Publi.ToString();
-            
-            Response.Redirect("Inicio_Grupo.aspx");
-        }
-
-        protected void BtnMostrarEvento_Click(object sender, EventArgs e)
-        {
-            //conexion MongoDB
-            var client = new MongoClient("mongodb://127.0.0.1:27017");
-            //Conexion base de datoa
-            var database = client.GetDatabase("EcoAmigos");
-            //Conexion collections
-            var EventoCollections = database.GetCollection<Eventos>("EAV_EVENTOS");
-            //Mostrar Datos
-            var ListEve = EventoCollections.Find(d => d.Titutlo_Evento == DropDownListTituloE.Text).ToList();
-
-            TbFecha0.Text = ListEve[0].Fecha_Evento.ToString();
-            Tipo_Evento0.Text = ListEve[0].Titutlo_Evento.ToString();
-            TbContEvento0.Text = ListEve[0].Contenido_Evento.ToString();
-        }
-
         protected void BtnGuardarPubli_Click(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://127.0.0.1:27017");
-            //Conexion base de datoa
-            var database = client.GetDatabase("EcoAmigos");
-            //Conexion collections
-            var PubliCollections = database.GetCollection<Publicacion>("EAV_PUBLICACION");
-            //Mostrar
-            var ListPubli = PubliCollections.Find(d => d.Titutlo_Publi == DropDownListPublicacion.Text).ToList();
-            //Datos
-            var publicacion = new Publicacion() { id = ListPubli[0].id.ToString(), Titutlo_Publi = DropDownListPublicacion.Text, Logo_Publi = ListPubli[0].Logo_Publi.ToString(), Nombre_Pag = ListPubli[0].Nombre_Pag.ToString() };
-            //Actualizar
-            PubliCollections.ReplaceOne(d => d.Titutlo_Publi == DropDownListPublicacion.ToString(), publicacion);
+            LabeltiP.Text = DropDownListPublicacion.Text;
+            
             SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=EcoAmigos;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand("UPDATE EAV_PUBLIBACIONES SET(Nombre_Pag = '" + ListPubli[0].Nombre_Pag.ToString() + "', Titulo_Publi = '" + DropDownListPublicacion.Text + "', ContenidoPubli = '" + TbContP0.Text + "', Logo_Publi = '" + ListPubli[0].Logo_Publi.ToString() + "' WHERE Titulo_Publi = '" + DropDownListPublicacion.Text + "')", conn);
+            SqlCommand cmd = new SqlCommand("UPDATE EAV_PUBLIBACIONES SET ContenidoPubli = '" + TbContP0.Text + "' WHERE Titulo_Publi = '" + LabeltiP.Text + "'", conn);
             conn.Open();
 
             try
             {
                 cmd.ExecuteNonQuery();
+                Response.Redirect("Inicio_Grupo.aspx");
             }
             catch (Exception EX)
             {
@@ -281,24 +235,16 @@ namespace EcoAmigios.Forms
 
         protected void BtnGuardarEventos_Click(object sender, EventArgs e)
         {
-            var client = new MongoClient("mongodb://127.0.0.1:27017");
-            //Conexion base de datoa
-            var database = client.GetDatabase("EcoAmigos");
-            //Conexion collections
-            var EveCollections = database.GetCollection<Eventos>("EAV_EVENTOS");
-            //Mostrar
-            var ListEve = EveCollections.Find(d => d.Titutlo_Evento == DropDownListTituloE.Text).ToList();
-            //Datos
-            var Eventos = new Eventos() { id = ListEve[0].id.ToString(), Titutlo_Evento = DropDownListTituloE.Text, Fecha_Evento = TbFecha0.Text, Nombre_Pag = ListEve[0].Nombre_Pag.ToString(), Contenido_Evento = TbContEvento0.Text };
-            //Actualizar
-            EveCollections.ReplaceOne(d => d.Titutlo_Evento == DropDownListTituloE.ToString(), Eventos);
+            Labelti.Text = DropDownListTituloE.Text;
+
             SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=EcoAmigos;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand("UPDATE EAV_EVENTOS SET (Nombre_Pag = '" + ListEve[0].Nombre_Pag.ToString() + "',Titulo_Evento = '" + DropDownListTituloE.Text + "',Contenido_Evento = '" + TbContEvento0.Text + "',Fecha_Evento = '" + TbFecha0.Text + "') WHERE Titulo_Evento = '" + DropDownListTituloE.Text + "'", conn);
+            SqlCommand cmd = new SqlCommand("UPDATE EAV_EVENTOS SET Contenido_Evento = '" + TbContEvento0.Text + "', Fecha_Evento = '" + TbFecha0.Text + "' WHERE Titulo_Evento = '" + Labelti.Text + "'", conn);
             conn.Open();
 
             try
             {
                 cmd.ExecuteNonQuery();
+                Response.Redirect("Inicio_Grupo.aspx");
             }
             catch(Exception EX)
             {
@@ -308,6 +254,111 @@ namespace EcoAmigios.Forms
             {
                 conn.Close();
             }
+        }
+
+        protected void btnBorrar_Click(object sender, EventArgs e)
+        {
+            //conexion MongoDB
+            var client = new MongoClient("mongodb://127.0.0.1:27017");
+            //Conexion base de datoa
+            var database = client.GetDatabase("EcoAmigos");
+            //Conexion collections
+            var GrupoCollections = database.GetCollection<Pagina>("EAV_PAGINA");
+            var PubliCollections = database.GetCollection<Publicacion>("EAV_PUBLIBACIONES");
+            var EveCollections = database.GetCollection<Publicacion>("EAV_EVENTOS");
+            //Mostrar Datos
+            var ListGrupo = GrupoCollections.Find(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString()).ToList();
+            //Borrar Datos
+            GrupoCollections.DeleteOne(d => d.Nombre_Pagina == Session["Nombre_Pag"].ToString());
+            PubliCollections.DeleteOne(d => d.Nombre_Pag == Session["Nombre_Pag"].ToString());
+            EveCollections.DeleteOne(d => d.Nombre_Pag == Session["Nombre_Pag"].ToString());
+
+            SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=EcoAmigos;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("DELETE FROM EAV_PAGINA WHERE Nombre_Pagina = '" + Session["Nombre_Pag"].ToString() + "'" +
+                "DELETE FROM EAV_EVENTOS WHERE Nombre_Pag = '" + Session["Nombre_Pag"].ToString() + "'" +
+                "DELETE FROM EAV_PUBLIBACIONES WHERE Nombre_Pag = '" + Session["Nombre_Pag"].ToString() + "'", conn);
+            conn.Open();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                Response.Redirect("Inicio_Grupo.aspx");
+
+            }
+            catch (Exception EX)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + EX + "');", true);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        protected void btnBorrarP_Click(object sender, EventArgs e)
+        {
+            string titulop = DropDownListPublicacion.Text;
+            //conexion MongoDB
+            var client = new MongoClient("mongodb://127.0.0.1:27017");
+            //Conexion base de datoa
+            var database = client.GetDatabase("EcoAmigos");
+            //Conexion collections
+            var GrupoCollections = database.GetCollection<Publicacion>("EAV_PUBLIBACIONES");
+            //Borrar Datos
+            GrupoCollections.DeleteOne(d => d.Titutlo_Publi == titulop);
+
+            SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=EcoAmigos;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("DELETE FROM EAV_PUBLIBACIONES WHERE Titulo_Publi = '" + titulop + "'", conn);
+            conn.Open();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                Response.Redirect("Inicio_Grupo.aspx");
+            }
+            catch (Exception EX)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + EX + "');", true);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        protected void btnBorrarE_Click(object sender, EventArgs e)
+        {
+            //conexion MongoDB
+            var client = new MongoClient("mongodb://127.0.0.1:27017");
+            //Conexion base de datoa
+            var database = client.GetDatabase("EcoAmigos");
+            //Conexion collections
+            var GrupoCollections = database.GetCollection<Eventos>("EAV_EVENTOS");
+            //Borrar Datos
+            GrupoCollections.DeleteOne(d => d.Titutlo_Evento == DropDownListTituloE.Text);
+
+            SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=EcoAmigos;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("DELETE FROM EAV_EVENTOS WHERE Titulo_Evento = '" + DropDownListTituloE.Text + "'", conn);
+            conn.Open();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                Response.Redirect("Inicio_Grupo.aspx");
+            }
+            catch (Exception EX)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + EX + "');", true);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        protected void IBVer_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Ver_Pagina.aspx");
         }
     }
 }

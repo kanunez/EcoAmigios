@@ -149,6 +149,7 @@
     <Content Include="Imagenes\boton-de-cuenta-.png" />
     <Content Include="Imagenes\cerrar-sesion.png" />
     <Content Include="Imagenes\Contraseña.png" />
+    <Content Include="Imagenes\conversacion.png" />
     <Content Include="Imagenes\CrearP_Usuario.jpg" />
     <Content Include="Imagenes\Cuenta.jpg" />
     <Content Include="Imagenes\editar-texto.png" />
@@ -162,6 +163,8 @@
     <Content Include="Imagenes\Registro.jpg" />
     <Content Include="Imagenes\Regresar.png" />
     <Content Include="Imagenes\Rga.jpg" />
+    <Content Include="Imagenes\vistas-de-pagina.png" />
+    <Content Include="Imagenes\whatsapp.png" />
     <Content Include="mongocrypt.dll" />
     <Content Include="Web.config" />
   </ItemGroup>

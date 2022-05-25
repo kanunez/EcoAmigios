@@ -62,6 +62,14 @@
             width: 62px;
             height: 56px;
         }
+        .auto-style22 {
+            text-align: center;
+        }
+        .auto-style23 {
+            width: 323px;
+            font-family: "Comic Sans MS";
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +100,14 @@
                             </td>
                             <td class="auto-style7">
                                 <asp:Label ID="LabelEEven" runat="server" Font-Names="Comic Sans MS" Text="Editar Eventos o Publicaciones"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style3">
+                                <asp:ImageButton ID="IBVer" runat="server" Height="52px" ImageUrl="~/Imagenes/vistas-de-pagina.png" OnClick="IBVer_Click" Width="51px" />
+                            </td>
+                            <td class="auto-style2">
+                                <asp:Label ID="Label58" runat="server" Font-Names="Comic Sans MS" Text="Ver Pagina"></asp:Label>
                             </td>
                         </tr>
                         <tr>
@@ -142,7 +158,7 @@
                                 <asp:Label ID="Label17" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Nombre De La Pagina"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="TbNombreP" runat="server" CssClass="texbox" Font-Names="Comic Sans MS" Width="295px"></asp:TextBox>
+                                <asp:TextBox ID="TbNombreP" runat="server" CssClass="texbox" Font-Names="Comic Sans MS" Width="295px" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -172,7 +188,8 @@
                                 <asp:Button ID="btnActualizar" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="btnActualizar_Click" Text="Actualizar Pagina" />
                             </td>
                             <td class="auto-style9">
-                                <asp:Label ID="LabelImg" runat="server" Visible="False"></asp:Label>
+                                <asp:Label ID="LabelImg" runat="server"></asp:Label>
+                                <asp:Button ID="btnBorrar" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="btnBorrar_Click" Text="Borar Pagina" />
                             </td>
                         </tr>
                     </table>
@@ -226,18 +243,9 @@
                                     </tr>
                                     <tr>
                                         <td class="auto-style13">
-                                            <asp:Label ID="Label44" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Tipo de evento:"></asp:Label>
-                                        </td>
+                                            &nbsp;</td>
                                         <td>
-                                            <asp:DropDownList ID="Tipo_Evento" runat="server" CssClass="lista" Font-Names="Comic Sans MS" ForeColor="Black">
-                                                <asp:ListItem>Seleccione uno:</asp:ListItem>
-                                                <asp:ListItem>Video llamada</asp:ListItem>
-                                                <asp:ListItem>Caminata Ecologica</asp:ListItem>
-                                                <asp:ListItem>Visita Ecologica</asp:ListItem>
-                                                <asp:ListItem>Limpiezas Ecologicas</asp:ListItem>
-                                                <asp:ListItem>Otro</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </td>
+                                            &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td class="auto-style13">
@@ -283,7 +291,7 @@
                 <asp:View ID="View4" runat="server">
                     <table class="auto-style1">
                         <tr>
-                            <td class="auto-style19" colspan="2">
+                            <td class="auto-style19" colspan="3">
                                 <p class="text">
                                     <asp:ImageButton ID="IBRegresar3" runat="server" Height="52px" ImageUrl="~/Imagenes/cerrar-sesion.png" OnClick="IBRegresar1_Click" Width="51px" />
                                     <asp:Label ID="Label51" runat="server" Font-Names="Comic Sans MS" Text="Regresar"></asp:Label>
@@ -295,7 +303,7 @@
                             <td class="auto-style21">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <asp:Label ID="Label52" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Titulo:"></asp:Label>
                             </td>
-                            <td>
+                            <td colspan="2">
                                 <asp:DropDownList ID="DropDownListPublicacion" runat="server" CssClass="lista" DataSourceID="SqlDataSource2" DataTextField="Titulo_Publi" DataValueField="Titulo_Publi" Font-Names="Comic Sans MS">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EcoAmigosConnectionString %>" SelectCommand="SELECT [Titulo_Publi] FROM [EAV_PUBLIBACIONES] WHERE ([Nombre_Pag] = @Nombre_Pag)">
@@ -308,8 +316,10 @@
                         <tr>
                             <td class="auto-style21">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <asp:Label ID="Label53" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Contenido:"></asp:Label>
+                                <asp:Label ID="LabeltiP" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Fecha" Visible="False"></asp:Label>
+                                <asp:Label ID="Labelid" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Fecha" Visible="False"></asp:Label>
                             </td>
-                            <td>
+                            <td colspan="2">
                                 <asp:TextBox ID="TbContP0" runat="server" CssClass="auto-style17" Font-Names="Comic Sans MS" Height="72px" TextMode="MultiLine" Width="404px"></asp:TextBox>
                             </td>
                         </tr>
@@ -318,14 +328,16 @@
                                 <asp:Button ID="BtnGuardarPubli" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="BtnGuardarPubli_Click" Text="Guardar Publicacion" />
                             </td>
                             <td class="auto-style16">
-                                <asp:Button ID="BtnMostrarPublicacion" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="BtnMostrarPublicacion_Click" Text="Mostrar Publicacion" />
+                                &nbsp;</td>
+                            <td class="auto-style16">
+                                <asp:Button ID="btnBorrarP" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="btnBorrarP_Click" Text="Borar Publicacion" />
                             </td>
                         </tr>
                         <tr>
                             <td class="auto-style21">
                                 <table class="auto-style1">
                                     <tr>
-                                        <td class="auto-style18" colspan="2">
+                                        <td class="auto-style18" colspan="3">
                                             <h1 class="text">EDITAR EVENTO</h1>
                                         </td>
                                     </tr>
@@ -333,7 +345,7 @@
                                         <td class="auto-style13">
                                             <asp:Label ID="Label56" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Titulo:"></asp:Label>
                                         </td>
-                                        <td>
+                                        <td colspan="2">
                                             <asp:DropDownList ID="DropDownListTituloE" runat="server" CssClass="lista" DataSourceID="SqlDataSource1" DataTextField="Titulo_Evento" DataValueField="Titulo_Evento" Font-Names="Comic Sans MS">
                                             </asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EcoAmigosConnectionString %>" SelectCommand="SELECT [Titulo_Evento] FROM [EAV_EVENTOS] WHERE ([Nombre_Pag] = @Nombre_Pag)">
@@ -347,46 +359,39 @@
                                         <td class="auto-style13">
                                             <asp:Label ID="Label55" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Fecha"></asp:Label>
                                         </td>
-                                        <td>
+                                        <td colspan="2">
                                             <asp:TextBox ID="TbFecha0" runat="server" CssClass="texbox" Font-Names="Comic Sans MS" TextMode="DateTimeLocal"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="auto-style13">
-                                            <asp:Label ID="Label54" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Tipo de evento:"></asp:Label>
+                                            <asp:Label ID="Labelti" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Fecha" Visible="False"></asp:Label>
                                         </td>
-                                        <td>
-                                            <asp:DropDownList ID="Tipo_Evento0" runat="server" CssClass="lista" Font-Names="Comic Sans MS" ForeColor="Black">
-                                                <asp:ListItem>Seleccione uno:</asp:ListItem>
-                                                <asp:ListItem>Video llamada</asp:ListItem>
-                                                <asp:ListItem>Caminata Ecologica</asp:ListItem>
-                                                <asp:ListItem>Visita Ecologica</asp:ListItem>
-                                                <asp:ListItem>Limpiezas Ecologicas</asp:ListItem>
-                                                <asp:ListItem>Otro</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </td>
+                                        <td colspan="2">
+                                            &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td class="auto-style13">
                                             <asp:Label ID="Label57" runat="server" CssClass="Todo" Font-Names="Comic Sans MS" Text="Se realizara:"></asp:Label>
                                         </td>
-                                        <td>
+                                        <td colspan="2">
                                             <asp:TextBox ID="TbContEvento0" runat="server" CssClass="auto-style17" Font-Names="Comic Sans MS" Height="71px" TextMode="MultiLine" Width="404px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="auto-style13" rowspan="2">
+                                        <td class="auto-style23" rowspan="2">
                                             <asp:Button ID="BtnGuardarEventos" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="BtnGuardarEventos_Click" Text="Guardar Evento" />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <asp:Button ID="BtnMostrarEvento" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="BtnMostrarEvento_Click" Text="Mostrar Evento" />
+                                        <td class="auto-style22">&nbsp;</td>
+                                        <td class="auto-style22">
+                                            <asp:Button ID="btnBorrarE" runat="server" CssClass="boton" Font-Names="Comic Sans MS" OnClick="btnBorrarE_Click" Text="Borar Evento" />
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td>&nbsp;</td>
+                            <td colspan="2">&nbsp;</td>
                         </tr>
                     </table>
                     <br />

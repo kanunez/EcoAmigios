@@ -94,6 +94,24 @@ namespace EcoAmigios.Forms {
         protected global::System.Web.UI.WebControls.Label LabelEEven;
         
         /// <summary>
+        /// Control IBVer.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton IBVer;
+        
+        /// <summary>
+        /// Control Label58.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label58;
+        
+        /// <summary>
         /// Control IBRegresar.
         /// </summary>
         /// <remarks>
@@ -238,6 +256,15 @@ namespace EcoAmigios.Forms {
         protected global::System.Web.UI.WebControls.Label LabelImg;
         
         /// <summary>
+        /// Control btnBorrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBorrar;
+        
+        /// <summary>
         /// Control View2.
         /// </summary>
         /// <remarks>
@@ -317,24 +344,6 @@ namespace EcoAmigios.Forms {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnGuardar;
-        
-        /// <summary>
-        /// Control Label44.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label44;
-        
-        /// <summary>
-        /// Control Tipo_Evento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Tipo_Evento;
         
         /// <summary>
         /// Control Label45.
@@ -463,6 +472,24 @@ namespace EcoAmigios.Forms {
         protected global::System.Web.UI.WebControls.Label Label53;
         
         /// <summary>
+        /// Control LabeltiP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabeltiP;
+        
+        /// <summary>
+        /// Control Labelid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Labelid;
+        
+        /// <summary>
         /// Control TbContP0.
         /// </summary>
         /// <remarks>
@@ -481,13 +508,13 @@ namespace EcoAmigios.Forms {
         protected global::System.Web.UI.WebControls.Button BtnGuardarPubli;
         
         /// <summary>
-        /// Control BtnMostrarPublicacion.
+        /// Control btnBorrarP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnMostrarPublicacion;
+        protected global::System.Web.UI.WebControls.Button btnBorrarP;
         
         /// <summary>
         /// Control Label56.
@@ -535,22 +562,13 @@ namespace EcoAmigios.Forms {
         protected global::System.Web.UI.WebControls.TextBox TbFecha0;
         
         /// <summary>
-        /// Control Label54.
+        /// Control Labelti.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label54;
-        
-        /// <summary>
-        /// Control Tipo_Evento0.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Tipo_Evento0;
+        protected global::System.Web.UI.WebControls.Label Labelti;
         
         /// <summary>
         /// Control Label57.
@@ -580,12 +598,12 @@ namespace EcoAmigios.Forms {
         protected global::System.Web.UI.WebControls.Button BtnGuardarEventos;
         
         /// <summary>
-        /// Control BtnMostrarEvento.
+        /// Control btnBorrarE.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnMostrarEvento;
+        protected global::System.Web.UI.WebControls.Button btnBorrarE;
     }
 }

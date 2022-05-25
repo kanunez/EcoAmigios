@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="../CSS/Ver_Pag.css" rel="stylesheet" />
-    <title></title>
+    <title>Paginas</title>
     <style type="text/css">
         
         .auto-style1 {
@@ -31,6 +31,10 @@
                 
         .auto-style7 {
             width: 1068px;
+        }
+                
+        .auto-style8 {
+            text-align: center;
         }
                 
     </style>
@@ -81,14 +85,16 @@
                             <td class="auto-style9">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="auto-style11">
-                                &nbsp;</td>
+                            <td class="auto-style11" rowspan="2">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:ImageButton ID="IBMensaje" runat="server" Height="52px" ImageUrl="~/Imagenes/whatsapp.png" OnClick="IBMensaje_Click" Width="51px" />
+                                <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <asp:Label ID="Label49" runat="server" Font-Names="Comic Sans MS" Text="Enviar Mensaje"></asp:Label>
+                            </td>
                             <td class="auto-style9">
                                 &nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="auto-style11">
-                                &nbsp;</td>
                             <td class="auto-style9">
                                 &nbsp;</td>
                         </tr>
@@ -96,34 +102,44 @@
         </div>
         <table class="auto-style5">
             <tr>
-                <td class="auto-style7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <td class="auto-style7">
+                    <div class="auto-style8">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:DataList ID="DataListPublicaciones" runat="server" DataSourceID="SqlDataSourcePublicaciones" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Left" Font-Names="Comic Sans MS" Font-Size="Large" Width="868px">
                         <AlternatingItemStyle Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" />
                         <ItemStyle Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" />
                         <ItemTemplate>
+                            PUBLICACIONES
                             <table class="auto-style6">
+                                
+                                <br />
                                 <tr>
                                     <td rowspan="2"><asp:Image ID="ImagePagina" runat="server" CssClass="imagen" height="120" ImageUrl='<%# "~/Imagenes/"+Eval("Logo_Publi") %>' width="140" /></td>
                                     <td> Titulo:
                                     <asp:Label ID="Titulo_PubliLabel" runat="server" Text='<%# Eval("Titulo_Publi") %>' /></td>
                                 </tr>
                                 <tr>
+                                    <br />
                                     <td><asp:Label ID="ContenidoPubliLabel" runat="server" Text='<%# Eval("ContenidoPubli") %>' /></td>
                                 </tr>
                             </table>
                         </ItemTemplate>
                     </asp:DataList>
                     
+                    </div>
+                    
                     <asp:SqlDataSource ID="SqlDataSourcePublicaciones" runat="server" ConnectionString="<%$ ConnectionStrings:EcoAmigosConnectionString %>" SelectCommand="SELECT [Titulo_Publi], [ContenidoPubli], [Logo_Publi] FROM [EAV_PUBLIBACIONES] WHERE ([Nombre_Pag] = @Nombre_Pag)">
                         <SelectParameters>
                             <asp:SessionParameter Name="Nombre_Pag" SessionField="Nombre_Pag" Type="String" />
                         </SelectParameters>
                     </asp:SqlDataSource>
-                    <
                 </td>
                 <td class="auto-style4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:DataList ID="DataListEventos" runat="server" DataSourceID="SqlDataSourceEventos" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Right" Width="267px">
                         <ItemTemplate>
+                            EVENTOS
+                            <br />
+                            <br />
                             Titulo:
                             <br />
                             <asp:Label ID="Titulo_EventoLabel" runat="server" Text='<%# Eval("Titulo_Evento") %>' />

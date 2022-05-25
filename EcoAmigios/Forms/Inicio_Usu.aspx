@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Inicio Usuario</title>
+    <title>Inicio</title>
     <style type="text/css">
         body{
             background-color:palegreen;
@@ -78,8 +78,8 @@
         </div>
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
-                <asp:DataList ID="DataPaginas" OnItemCommand = "DataPaginas_ItemCommand" runat="server" DataSourceID="SqlDataPaginas" Font-Bold="False" Font-Italic="False" Font-Names="Comic Sans MS" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" GridLines="Both" HorizontalAlign="Center" RepeatDirection="Horizontal" CssClass="data">
-                    <ItemStyle Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Center" VerticalAlign="Top" Font-Names="Comic Sans MS" Font-Size="Large" />
+                <asp:DataList ID="DataPaginas" OnItemCommand = "DataPaginas_ItemCommand" runat="server" DataSourceID="SqlDataPaginas" Font-Bold="False" Font-Italic="False" Font-Names="Comic Sans MS" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" GridLines="Both" HorizontalAlign="Center" RepeatDirection="Horizontal" CssClass="data" Font-Size="X-Large">
+                    <ItemStyle Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Center" VerticalAlign="Top" Font-Names="Comic Sans MS" Font-Size="X-Large" />
                     <ItemTemplate>
                         <asp:Image ID="ImagePagina" runat="server" CssClass="imagen" height="120" ImageUrl='<%# "~/Imagenes/"+Eval("Logo_Grupo") %>' width="140" />
                             <br />

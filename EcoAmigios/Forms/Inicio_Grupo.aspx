@@ -26,6 +26,9 @@
         .auto-style3 {
             width: 1px;
         }
+        .auto-style4 {
+            font-size: xx-large;
+        }
         </style>
 </head>
 <body>
@@ -53,7 +56,7 @@
             </table>
             <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
                 <asp:View ID="View1" runat="server">
-                    <asp:DataList ID="DataPaginas" runat="server" BorderColor="Gray" DataSourceID="SqlPagina" Font-Bold="False" Font-Italic="False" Font-Names="Comic Sans MS" Font-Overline="False" Font-Size="Large" Font-Strikeout="False" Font-Underline="False" GridLines="Both" HorizontalAlign="Center" OnItemCommand="DataPaginas_ItemCommand" RepeatColumns="5">
+                    <asp:DataList ID="DataPaginas" runat="server" BorderColor="Gray" DataSourceID="SqlPagina" Font-Bold="False" Font-Italic="False" Font-Names="Comic Sans MS" Font-Overline="False" Font-Size="X-Large" Font-Strikeout="False" Font-Underline="False" GridLines="Both" HorizontalAlign="Center" OnItemCommand="DataPaginas_ItemCommand" RepeatColumns="5" CssClass="auto-style4">
                         <ItemStyle Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Center" VerticalAlign="Middle" />
                         <ItemTemplate>
                             <asp:Image ID="ImagePagina" runat="server" CssClass="imagen" height="120" ImageUrl='<%# "~/Imagenes/"+Eval("Logo_Grupo") %>' width="140" />

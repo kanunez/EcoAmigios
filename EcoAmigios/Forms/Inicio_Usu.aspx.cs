@@ -19,24 +19,18 @@ namespace EcoAmigios.Forms
 
         protected void DataPaginas_ItemCommand(object source, DataListCommandEventArgs e)
         {
-            if (e.CommandName == "Ver_Pagina")
-            {
-                Label lbl = (Label)DataPaginas.Items[0].FindControl("Nombre_PaginaLabel");
-                LabelNombre.Text = lbl.Text;
-                Session["Nombre_Pag"] = LabelNombre.Text;
-                Response.Redirect("Ver_Pagina.aspx");
-            }
+            DataPaginas.SelectedIndex = e.Item.ItemIndex;
+            LabelNombre.Text = "" + ((Label)DataPaginas.SelectedItem.FindControl("Nombre_PaginaLabel")).Text;
+            Session["Nombre_Pag"] = LabelNombre.Text;
+            Response.Redirect("Ver_Pagina.aspx");
         }
 
         protected void DataPaginasFiltrar_ItemCommand(object source, DataListCommandEventArgs e)
         {
-            if (e.CommandName == "Ver_Pagina0")
-            {
-                Label lbl1 = (Label)DataPaginasFiltrar.Items[0].FindControl("Nombre_PaginaLabel0");
-                LabelNombre.Text = lbl1.Text;
-                Session["Nombre_Pag"] = LabelNombre.Text;
-                Response.Redirect("Ver_Pagina.aspx");
-            }
+            DataPaginas.SelectedIndex = e.Item.ItemIndex;
+            LabelNombre.Text = "" + ((Label)DataPaginas.SelectedItem.FindControl("Nombre_PaginaLabel")).Text;
+            Session["Nombre_Pag"] = LabelNombre.Text;
+            Response.Redirect("Ver_Pagina.aspx");
         }
 
         protected void BtBuscar_Click(object sender, EventArgs e)

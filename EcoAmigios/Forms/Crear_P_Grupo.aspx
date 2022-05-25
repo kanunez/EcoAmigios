@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="../CSS/Creap_P.css" rel="stylesheet" />
-    <title>CrearP_Usuario</title>
+    <title>Crear Pagina</title>
     <style type="text/css">
       
         .auto-style1 {
